@@ -1,5 +1,5 @@
 const assert = require('assert');
-const User = require('../src/users')
+const User = require('../src/user')
 
 describe('Deleting a user', () => {
   let joe;
@@ -45,5 +45,5 @@ describe('Deleting a user', () => {
         done();
       });
   });
-  
+
 });
