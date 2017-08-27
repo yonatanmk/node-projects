@@ -13,6 +13,10 @@ const UserSchema = new Schema({
   },
   likes: Number,
   posts: [PostSchema],
+  blogPosts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'blogPost'
+  }]
 });
 
 UserSchema.virtual('postCount').get(function() {
