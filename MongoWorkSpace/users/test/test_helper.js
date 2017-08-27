@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// reference to use es6 primse library in mongoose
+// reference to use es6 promise library in mongoose
 mongoose.Promise = global.Promise;
 
 before((done) => {
@@ -14,8 +14,13 @@ before((done) => {
 
 
 beforeEach((done) => {
-  mongoose.connection.collections.users.drop((d) => {
-    // Ready to run the next test!
-    done();
+  // blogposts must be all lower case
+  const { users, comments, blogposts } = mongoose.connection.collections;
+  users.drop(() => {
+    comments.drop(() => {
+      blogposts.drop(() => {
+        done();
+      });
+    });
   });
-})
+});
