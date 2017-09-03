@@ -10,7 +10,13 @@ if (process.env.NODE_ENV !== 'test') {
   mongoose.connect('mongodb://localhost/muber'); // connects to local mongo database. connection to test db mage in test_helper
 }
 
-app.use(bodyParser.json());
-routes(app);
+app.use(bodyParser.json()); // express middleware before handler
+routes(app); // handler
+
+app.use((err, req, res, next) => { // express middleware after handler
+  res.status(422).send({ error: err.message });
+})
+
+
 
 module.exports = app;
