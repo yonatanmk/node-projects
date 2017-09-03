@@ -1,10 +1,8 @@
 const express = require('express');
-
+const routes = require('./routes/routes')
 const app = express();
 
 // Watch for GET to http://localhost:3030/api
-app.get('/api', (req, res) => {
-  res.send({ hi: 'there' })
-});
+routes(app)
 
 module.exports = app;
