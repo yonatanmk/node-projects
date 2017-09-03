@@ -37,12 +37,16 @@ describe('the express App', () => {
       request(app)
         .delete(`/api/drivers/${driver._id}`)
         .end(() => {
-          Driver.count().then(count => {
-            assert(count === 0);
-            done();
-          });
+          // Driver.count().then(count => {
+          //   assert(count === 0);
+          //   done();
+          Driver.findOne({ email: 'test@test.com' })
+            .then(driver => {
+              assert(driver === null);
+              done();
+            });
         });
     });
   });
-  
+
 });
